@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8/>
+	<title>Titulo</title>
+	<!-- <link rel="stylesheet" href="style.css"/> -->
+</head>
+<body>
+
+<script id="blogTemplate" type=tuts/template>
+	<h2>{{title}}</h2>
+	<img src={{thumbnail}} alt={{title}}>	
+</script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<script>
+(function(){
+	var content = [{
+		title: 'My awesome blog post',
+		thumbnail: 'http://thumb1.shutterstock.com/display_pic_with_logo/752857/183518018/stock-vector-cool-comic-speech-bubble-cartoon-183518018.jpg',
+	},
+	{
+		title: 'My second awesome blog post',
+		thumbnail: 'http://t1.ftcdn.net/jpg/00/38/82/18/400_F_38821800_zF3AZmOXVgmI06Ln0bOqfjZoJIN4TlNJ.jpg',		
+	}
+	],
+		template = $.trim($('#blogTemplate').html()),
+		frag = '';
+
+	$.each( content, function(index, obj){ // each sirve para filtrar un array o un objeto
+		frag +=
+			template.replace( /{{title}}/gi, obj.title)
+					.replace( /{{thumbnail}}/gi, obj.thumbnail);
+	});
+
+	$(document.body).append(frag);
+
+})();
+</script>
+</body>
+</html>

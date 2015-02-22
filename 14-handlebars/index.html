@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8/>
+	<title>Mustache</title>
+	<style>
+	h2 span {
+		color:gray;
+		font-size: 0.8em;
+	}
+	
+	</style>
+	
+</head>
+<body>
+<ul class="tweets"> <!-- This template correspond to the tweets so we wrap it with ul tags poniendo la propiedad entre 3 { conseguimos que lea html tags-->
+	<script id="template" type="text/x-handlebars-template">
+		{{#each this}}
+		<li>
+			<h2>{{fullName author}}</h2>
+			<p>{{{tweet}}}</p>
+			
+			{{#if quote}}
+				<h5>{{quote}}</h5>
+			{{else}}
+			<h5>Author does not have a quote</h5>
+			{{/if}}
+		</li>
+		{{/each}}
+	</script>
+</ul>   
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="handlebars-v3.0.0.js"></script><!-- //no usar la version runtime de handlebars -->
+
+<script>
+(function(){
+	
+	var context = [
+		{
+		author: { first: 'Serguey', last: 'Arellano',age:30},
+		tweet: '<strong>30 dias</strong> para intentar aprender jQuery',
+		quote: 'Never give up'
+		},
+		{
+		author: { first: 'John', last: 'Doe', age: 45},
+		tweet: '30 dias para intentar aprender jQuery',
+		},
+	];
+
+	Handlebars.registerHelper('fullName', function(author){
+		return author.first +' '+ author.last + ' ' +author.age;
+	});
+
+	var template = Handlebars.compile($('#template').html());
+	$('ul.tweets').append(template(context));
+})();
+</script>
+</body>
+</html>

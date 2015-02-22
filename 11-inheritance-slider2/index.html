@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+	<meta>
+	<title>The obligatory Slider</title>
+	<style>
+	body {
+		width: 320px;
+		margin: 100px auto 0;
+		}
+		* {
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+	<link rel="stylesheet" href="slider.css">
+</head>
+<body>
+	<h1>Second attempt w/inheritance</h1>
+
+<div class="slider">
+	<ul>
+		<li><img src="img/image2.jpeg" alt="image"></li>
+		<li><img src="img/image1.jpeg" alt="image"></li>
+		<li><img src="img/image3.jpeg" alt="image"></li>
+		<li><img src="img/image4.jpeg" alt="image"></li>
+	</ul>
+</div>
+
+<div id="slider-nav">
+	<button data-dir="prev">Previous</button>
+	<button data-dir="next">Next</button>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="slider2.js"></script>
+
+<script>
+(function(){
+var container = $('div.slider').css('overflow','hidden').children('ul'),
+	slider = new Slider(container,$('#slider-nav'));
+
+slider.nav.find('button').on('click',function(){
+	console.log($(this)) //jQuery wrapper
+	console.log(this) //DOM object
+
+	slider.setCurrent($(this).data('dir'));
+	slider.transition();
+});
+	
+}
+)();
+	
+</script>
+</body>
+</html>
